@@ -13,7 +13,7 @@ const OnboardingPage = async () => {
 
     return (
         <main>
-            {/* <onboardingForm industries={industries} /> */}
+            <onboardingForm industries={industries} />
         </main>
     );
 };
