@@ -63,5 +63,5 @@ export async function getIndustryInsights() {
         });
         return industryInsight;
     }
-    return user.industryInsights;
+    return user.industryInsight;
 }
