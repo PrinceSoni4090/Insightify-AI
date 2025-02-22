@@ -3,7 +3,7 @@ import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 
 
-export async function updatedUser(data) {
+export async function updateUser(data) {
     const { userId } = await auth();
     if (!userId) throw new Error('Unauthorized');
 
@@ -55,10 +55,10 @@ export async function updatedUser(data) {
         }
         );
         revalidatePath("/");
-        return result.user;
+        return { success: true, ...result };
     } catch (error) {
         console.log("Error updating user and industry", error.message);
-        throw new Error("failed to update profile");
+        throw new Error("failed to update profile", error.message);
     }
 }
 

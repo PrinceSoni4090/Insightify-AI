@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { onboardingSchema } from '@/app/lib/schema';
@@ -11,10 +11,20 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
+import useFetch from '@/hooks/use-fetch';
+import { updateUser } from '@/actions/user';
+import { toast } from 'sonner';
+import { Loader2 } from 'lucide-react';
 
 const OnboardingForm = ({ industries }) => {
   const [selectedIndustry, setSelectedIndustry] = useState(null);
   const router = useRouter();
+
+  const {
+    loading: updateLoading,
+    fn: updateUserFn,
+    data: updateResult,
+  } = useFetch(updateUser);
 
   const {
     register,
@@ -27,8 +37,27 @@ const OnboardingForm = ({ industries }) => {
   });
 
   const onSubmit = async (values) => {
-    console.log(values);
+    try {
+      const formattedIndustry = `${values.industry}-{values.subIndustry
+      .toLowerCase()
+      .replace(/ /g, '-')}`;
+
+      await updateUserFn({
+        ...values,
+        industry: formattedIndustry,
+      });
+    } catch (error) {
+      console.error("Onboarding error", error);
+    }
   };
+
+  useEffect(() => {
+    if (updateResult?.success && !updateLoading) {
+      toast.success("Profile updated successfully");
+      router.push("/dashboard");
+      router.refresh();
+    }
+  }, [updateResult, updateLoading]);
 
   const watchIndustry = watch('industry');
 
@@ -42,7 +71,7 @@ const OnboardingForm = ({ industries }) => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form className='space-y-6' onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} className='space-y-6' >
             <div className='space-y-2'>
               <Label htmlFor="industry">Industry</Label>
               <Select
@@ -114,14 +143,16 @@ const OnboardingForm = ({ industries }) => {
 
 
             <div className='space-y-2'>
-              <Label htmlFor="Skills">Skills</Label>
+              <Label htmlFor="skills">Skills</Label>
               <Input
-                id="Skills"
+                id="skills"
                 placeholder="eg., Python, React, Javascript, etc."
-                {...register('Skills')}
+                {...register('skills')}
               />
-              <p className='text-sm text-muted-foreground'>Separate multiple skills with commas</p>
-              {errors.Skills && (
+              <p className='text-sm text-muted-foreground'>
+                Separate multiple skills with commas
+              </p>
+              {errors.skills && (
                 <p className='text-sm text-red-500'>{errors.Skills.message}</p>
               )}
             </div>
@@ -139,8 +170,15 @@ const OnboardingForm = ({ industries }) => {
                 <p className='text-sm text-red-500'>{errors.bio.message}</p>
               )}
             </div>
-            <Button type="submit" className='w-full '>
-              Complete Profile
+            <Button type="submit" className='w-full' disabled={updateLoading}>
+              {updateLoading ? (
+                <>
+                  <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                  Saving...
+                </>
+              ) : (
+                "Complete Profile"
+              )}
             </Button>
           </form>
         </CardContent>
