@@ -4,7 +4,7 @@ import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
 });
@@ -44,11 +44,14 @@ export async function getIndustryInsights() {
     const user = await db.user.findUnique({
         where: {
             clerkUserId: userId,
-        }
+        },
+        include: {
+            industryInsight: true,
+        },
     });
     if (!user) throw new Error("User not found");
 
-    if (!user.industryInsights) {
+    if (!user.industryInsight) {
         const insights = await generateAIInsights(user.industry);
 
         const industryInsight = await db.industryInsight.create({

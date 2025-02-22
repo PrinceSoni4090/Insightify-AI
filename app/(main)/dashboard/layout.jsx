@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { BarLoader } from 'react-spinners';
 
-const Layout = () => {
+const Layout = ({ children }) => {
     return (
         <div className='px-5'>
             <div className='flex items-center justify-between mb-5'>

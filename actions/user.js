@@ -1,6 +1,8 @@
 "use server";
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
+import { generateAIInsights } from "./dashboard";
+import { revalidatePath } from "next/cache";
 
 
 export async function updateUser(data) {
@@ -9,7 +11,7 @@ export async function updateUser(data) {
 
     const user = await db.user.findUnique({
         where: {
-            clerkUserId: userId,
+            clerkUserId: userId
         }
     });
 
@@ -19,7 +21,7 @@ export async function updateUser(data) {
         const result = await db.$transaction(
             async (tx) => {
                 // find if industry exists
-                let industryInsight = await tx.industryInsights.findUnique({
+                let industryInsight = await tx.industryInsight.findUnique({
                     where: {
                         industry: data.industry,
                     }
@@ -58,7 +60,7 @@ export async function updateUser(data) {
         return { success: true, ...result };
     } catch (error) {
         console.log("Error updating user and industry", error.message);
-        throw new Error("failed to update profile", error.message);
+        throw new Error("failed to update profile" + error.message);
     }
 }
 

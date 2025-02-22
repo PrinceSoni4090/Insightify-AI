@@ -38,9 +38,9 @@ const OnboardingForm = ({ industries }) => {
 
   const onSubmit = async (values) => {
     try {
-      const formattedIndustry = `${values.industry}-{values.subIndustry
-      .toLowerCase()
-      .replace(/ /g, '-')}`;
+      const formattedIndustry = `${values.industry}-${values.subIndustry
+        .toLowerCase()
+        .replace(/ /g, '-')}`;
 
       await updateUserFn({
         ...values,
@@ -57,7 +57,7 @@ const OnboardingForm = ({ industries }) => {
       router.push("/dashboard");
       router.refresh();
     }
-  }, [updateResult, updateLoading]);
+  }, [updateLoading, updateResult]);
 
   const watchIndustry = watch('industry');
 
@@ -153,7 +153,7 @@ const OnboardingForm = ({ industries }) => {
                 Separate multiple skills with commas
               </p>
               {errors.skills && (
-                <p className='text-sm text-red-500'>{errors.Skills.message}</p>
+                <p className='text-sm text-red-500'>{errors.skills.message}</p>
               )}
             </div>
 
