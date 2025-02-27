@@ -92,7 +92,7 @@ export async function saveQuizResult(questions, answers, score) {
         const improvementPrompt = `
       The user got the following ${user.industry} technical interview questions wrong:
 
-      ${wrongQuestionsText}
+      ${wrongQuestionsAnswer} // might get an error here
 
       Based on these mistakes, provide a concise, specific improvement tip.
       Focus on the knowledge gaps revealed by these wrong answers.
