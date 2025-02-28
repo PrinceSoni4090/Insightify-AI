@@ -82,7 +82,7 @@ const Quiz = () => {
         generateQuizFn();
         setResultData(null);
     };
-
+    // for generation quiz data
     if (generatingQuiz) {
         return <BarLoader className="mt-4" width={"100%"} color="gray" />;
     }
