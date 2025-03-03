@@ -24,7 +24,7 @@ export async function generateQuiz() {
     try {
 
         const prompt = `
-    Generate 10 technical interview questions for a ${user.industry
+    Generate 3 technical interview questions for a ${user.industry
             } professional${user.skills?.length ? ` with expertise in ${user.skills.join(", ")}` : ""
             }.
     
@@ -125,4 +125,32 @@ export async function saveQuizResult(questions, answers, score) {
         throw new Error("failed to save quiz result");
     }
 
+}
+
+export async function getAssessments() {
+    const { userId } = await auth();
+    if (!userId) throw new Error('Unauthorized');
+
+    const user = await db.user.findUnique({
+        where: {
+            clerkUserId: userId
+        }
+    });
+
+    if (!user) throw new Error("User not found");
+
+    try {
+        const assessments = await db.assessment.findMany({
+            where: {
+                userId: user.id
+            },
+            orderBy: {
+                createdAt: "desc"
+            }
+        });
+        return assessments;
+    } catch (error) {
+        console.log("Error getting assessment:", error);
+        throw new Error("failed to get assessment");
+    }
 }
