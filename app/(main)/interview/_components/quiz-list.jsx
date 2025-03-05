@@ -59,7 +59,7 @@ const QuizList = ({ assessments }) => {
                 </CardContent>
             </Card>
 
-            {/* dialog */}
+            {/* dialog box */}
             <Dialog open={!!selectedQuiz} onOpenChange={() => setSelectedQuiz(null)}>
                 <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
                     <DialogHeader>
