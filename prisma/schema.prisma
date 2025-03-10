@@ -72,7 +72,7 @@ model CoverLetter {
 // Combined Industry Trends and Salary Insights
 model IndustryInsight {
   id            String    @id @default(cuid())
-  industry      String    @unique  // The industry this data belongs to (e.g., "tech-software-development")
+  industry      String   @unique  // The industry this data belongs to (e.g., "tech-software-development")
   
   // Users in this industry
   users         User[]
