@@ -17,14 +17,14 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider
       appearance={{
-        baseTheme: dark
+        baseTheme: dark,
       }}
     >
       <html lang="en" suppressHydrationWarning>
-        <body className={`${inter.className} dark`} suppressHydrationWarning>
+        <body className={`${inter.className} `} suppressHydrationWarning>
           <ThemeProvider
             attribute="class"
-            defaultTheme="dark"
+            // defaultTheme="dark"
             enableSystem={true}
             disableTransitionOnChange
           >
