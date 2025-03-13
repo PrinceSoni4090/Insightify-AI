@@ -56,7 +56,7 @@ export async function getIndustryInsights() {
 
     const industryInsight = await db.industryInsight.create({
       data: {
-        industry: 'Tech', // Might need a fix here 
+        industry: 'Tech', // Might need a fix here later
         ...insights,
         nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       },
