@@ -171,7 +171,7 @@ export default function Home() {
       <section className="w-full">
         <div className="mx-auto py-24 rounded-lg">
           <div className="flex flex-col items-center justify-center space-y-4 text-center max-w-3xl mx-auto">
-            <h2 className="text-black dark:text-white text-3xl font-bold tracking-tighter text-primary-foreground sm:text-4xl md:text-5xl">
+            <h2 className="text-black dark:text-white text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
               Ready To Accelerate Your Career
             </h2>
             <p className="text-muted-foreground dark:text-muted-foreground mx-auto max-w-[600px] md:text-xl">

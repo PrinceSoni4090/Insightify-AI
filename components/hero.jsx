@@ -30,24 +30,18 @@ const HeroSection = () => {
       <div className="space-y-6 text-center">
         <div className="space-y-6 mx-auto">
           <h1 className="bg-gradient-to-r from-[hsl(var(--muted-foreground))] to-[hsl(var(--foreground))] text-transparent bg-clip-text text-5xl font-bold md:text-6xl lg:text-7xl xl-text-8xl ">
-            Your AI Career Coach for
+            Master Your Domain
             <br />
-            Professional Success
+            Insights & Interview Prep
           </h1>
           <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl">
-            Advance your career with personalized guidance, interview prep, and AI powered tools
-            from AI for job success
+            Gain in-depth industry insights and enhance your interview prep with AI-driven quizzes designed to help you practice
           </p>
         </div>
 
         <div className="flex justify-center space-x-4">
           <Link href="/dashboard">
             <Button size="lg" className="px-8">
-              Get Started
-            </Button>
-          </Link>
-          <Link href="/https://www.youtube.com">
-            <Button size="lg" className="px-8" variant="outline">
               Get Started
             </Button>
           </Link>
