@@ -14,13 +14,16 @@ const Header = async () => {
     <header className="fixed top-0 w-full border-b bg-background/80 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/60 shadow-sm">
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/">
-          <Image
-            src="/logo.png"
-            alt="logo"
-            width={200}
-            height={60}
-            className="h-12 py-1 w-auto object-contain"
-          />
+          <div className="flex flex-row items-center gap-3">
+            <Image
+              src="/logo5.svg"
+              alt="logo"
+              width={40}
+              height={30}
+              className="h-9 py-1 w-auto object-contain"
+            />
+            <h1 className="hidden text-xl font-semibold sm:inline-block">Insightify AI</h1>
+          </div>
         </Link>
         <div className="flex items-center space-x-2 md:space-x-4">
           <SignedIn>
