@@ -22,7 +22,7 @@ const Header = async () => {
               height={30}
               className="h-9 py-1 w-auto object-contain"
             />
-            <h1 className="hidden text-xl font-semibold sm:inline-block">Insightify AI</h1>
+            <h1 className="hidden text-2xl font-bold sm:inline-block">Insightify AI</h1>
           </div>
         </Link>
         <div className="flex items-center space-x-2 md:space-x-4">
